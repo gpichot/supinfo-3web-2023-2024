@@ -1,31 +1,40 @@
+import { useTrendingMoviesQuery } from "../api-hooks/movies";
 import { MovieCard } from "../components/MovieCard";
 
-const movies = [
-  {
-    title: "Top Gun",
-    description: "Film sur les avions",
-    casting: ["Tom Cruise"],
-  },
-  {
-    title: "Top Gun II",
-    description: "(encore) un film sur les avions",
-    casting: ["Tom Cruise (Toujours)"],
-  },
-  {
-    title: "Top Gun III",
-    description: "ENCORE UN Film sur les avions",
-    casting: ["Tom Cruise (et oui encore...)"],
-  },
-];
-
 export function HomePage() {
+  const trendingMoviesQuery = useTrendingMoviesQuery({ lang: "fr-FR" });
+
+  if (trendingMoviesQuery.isLoading) {
+    return <p>Chargement en cours</p>;
+  }
+
+  const { data: movies } = trendingMoviesQuery;
+  if (trendingMoviesQuery.isError || !movies) {
+    return (
+      <div>
+        <p>Erreur au chargement</p>
+        <button type="button" onClick={() => trendingMoviesQuery.refetch()}>
+          Recharger
+        </button>
+      </div>
+    );
+  }
+
   return (
     <>
       <h1>CineApp</h1>
       <p>Mon cinéma de campagne</p>
-      {movies.map((movie) => (
-        <MovieCard key={movie.title} movie={movie} />
-      ))}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr",
+          gap: 10,
+        }}
+      >
+        {movies.results.map((movie) => (
+          <MovieCard key={movie.title} movie={movie} />
+        ))}
+      </div>
     </>
   );
 }
