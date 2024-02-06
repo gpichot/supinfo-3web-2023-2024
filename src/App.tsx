@@ -4,6 +4,7 @@ import { HomePage } from "./pages/HomePage";
 import { Menu } from "./components/Menu";
 import { AboutPage } from "./pages/AboutPage";
 import { WelcomePage } from "./pages/WelcomePage";
+import DetailPage from "./pages/DetailPage";
 
 function Root() {
   return (
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
+      },
+      {
+        path: "/movie/:id",
+        element: <DetailPage />,
       },
       {
         path: "/hello/:prenom",
