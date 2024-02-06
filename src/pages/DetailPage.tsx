@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useDetailMovieQuery } from "../api-hooks/movies";
+import CommentForm from "../components/CommentForm";
 
 export default function DetailPage() {
   const { id } = useParams();
@@ -22,7 +23,9 @@ export default function DetailPage() {
       <img
         src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
         alt={movie.title}
+        height={200}
       />
+      <CommentForm />
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { Menu } from "./components/Menu";
 import { AboutPage } from "./pages/AboutPage";
 import { WelcomePage } from "./pages/WelcomePage";
 import DetailPage from "./pages/DetailPage";
+import ItemsPage from "./pages/ItemsPage";
 
 function Root() {
   return (
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
+      },
+      {
+        path: "/items",
+        element: <ItemsPage />,
       },
       {
         path: "/movie/:id",
